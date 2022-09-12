@@ -26,19 +26,18 @@ public class Tamagotchi
         {
             Console.WriteLine($"You fed {name} a biscuit and he is now less hungry.");
             hunger -= 2;
-            if (hunger > 10)
+            if (hunger > 5)
             {
                 isAlive = false;
                 Console.WriteLine($"You let {name} starve to death.");
             }
-            if (hunger < -10){
+            if (hunger < -5){
                 isAlive = false;
                 Console.WriteLine($"You overfed {name}. He is now dead.");
             }
         }
     public void ReduceBoredom()
         {
-            Console.WriteLine($"{name} is now less bored of you!");
             boredom -= 2;
             if (boredom < -5)
             {
@@ -48,6 +47,7 @@ public class Tamagotchi
             if (boredom > 5)
             {
                 Console.WriteLine($"{name} suddenly got depressed and offed himself -_-");
+                isAlive = false;
             }
         }
 
@@ -56,8 +56,11 @@ public class Tamagotchi
 
     }
 
-    public void Teach()
+    public void Teach(string word)
     {
+        Console.WriteLine($" [{name}] learns: {word}");
+        words.Add(word);
+        ReduceBoredom();
 
     }
 
@@ -65,10 +68,11 @@ public class Tamagotchi
     {
         hunger++;
         boredom++;
-        if (hunger > 10 || boredom > 10)
-        {
-            isAlive = false;
-        }
+        if (hunger > 5 || boredom > 5)
+    {
+      isAlive = false;
+    }
+
     }       
     
     public void PrintStats()
